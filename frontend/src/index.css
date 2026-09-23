@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-void: #0B0B0C;
+    --bg-surface: #131314;
+    --bg-surface-elevated: #1B1B1E;
+    --bg-panel: #24242A;
+    --primary-space: #0B3D91;
+    --primary-space-hover: #164EAA;
+    --accent-aero: #FC3D21;
+    --text-cosmic: #FFFFFF;
+    --text-muted: #A9AEC1;
+    --border-hairline: rgba(169, 174, 193, 0.18);
+  }
+
+  body {
+    background-color: #0B0B0C;
+    color: #E5E2E3;
+    font-family: 'Public Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-telemetry, .font-mono {
+    font-family: 'DM Mono', monospace;
+  }
+
+  .font-display {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+/* Custom Scrollbars for Mission Control Density */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0C;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2B;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #434652;
+}
+
+/* Leaflet Map Custom Stying for Tactical Dark Mode */
+.leaflet-container {
+  background: #0B0B0C !important;
+  font-family: 'DM Mono', monospace !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1B1B1E !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(169, 174, 193, 0.25) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+.leaflet-popup-tip {
+  background: #1B1B1E !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #1B1B1E !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(169, 174, 193, 0.2) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #0B3D91 !important;
+}
+
+/* Tactical Glow Utilities */
+.glow-space-blue {
+  box-shadow: 0 0 12px rgba(11, 61, 145, 0.5);
+}
+
+.glow-aero-red {
+  box-shadow: 0 0 12px rgba(252, 61, 33, 0.5);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+}
+
+.border-hairline {
+  border-color: rgba(169, 174, 193, 0.18);
+}
+
+/* Cut corner / chamfer utility */
+.cut-corner-tr {
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+}
+
+.cut-corner-bl {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
