@@ -54,6 +54,11 @@ interface WorkspaceState {
   timeRange: { start: string; end: string };
   regionBbox: [number, number, number, number] | null;
 
+  // Sidebar / Dashboard Navigation State
+  isSidebarOpen: boolean;
+  toggleSidebar: () => void;
+  setSidebarOpen: (open: boolean) => void;
+
   // Actions
   setSelectedSpill: (spillId: string | null) => void;
   setSelectedVessel: (mmsi: string | null) => void;
@@ -80,6 +85,10 @@ interface WorkspaceState {
 }
 
 export const useWorkspaceStore = create<WorkspaceState>((set, get) => ({
+  isSidebarOpen: true,
+  toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+  setSidebarOpen: (open) => set({ isSidebarOpen: open }),
+
   selectedSpillId: 'DET-2026-0891',
   selectedVesselMmsi: '419001284',
   activeSceneId: 'S1A_IW_GRDH_1SDV_20260923T041218',

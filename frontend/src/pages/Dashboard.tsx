@@ -2,12 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   ShieldAlert,
-  Radio,
   Briefcase,
   ChevronRight,
   Activity,
   Compass,
-  ExternalLink
+  ExternalLink,
+  Ship
 } from 'lucide-react';
 import { useWorkspaceStore } from '../store/workspaceStore';
 
@@ -27,27 +27,52 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="p-6 space-y-6 max-w-[1600px] mx-auto font-sans">
       {/* Page Title & Hero Bar */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[rgba(169,174,193,0.18)] pb-5">
-        <div>
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-[rgba(169,174,193,0.18)] pb-6">
+        <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-extrabold text-white font-display tracking-tight">
-              MARITIME SAR INTELLIGENCE DASHBOARD
+            <h1 className="text-3xl md:text-4xl font-black tracking-tight text-white font-display drop-shadow-sm flex flex-wrap items-center gap-2">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-sky-300 bg-clip-text text-transparent">
+                MARITIME SAR INTELLIGENCE
+              </span>
+              <span className="text-[#8DADFF] font-semibold text-2xl md:text-3xl font-mono">
+                // DASHBOARD
+              </span>
             </h1>
-            <span className="px-2 py-0.5 rounded text-xs font-mono font-bold bg-[#0B3D91] text-white border border-blue-400/30">
+          </div>
+
+          {/* Sector 04 Arabian Sea badge and description positioned cleanly below the title */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-mono font-bold bg-[#0B3D91]/25 text-[#8DADFF] border border-[#0B3D91]/60 shadow-[0_0_12px_rgba(11,61,145,0.3)]">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
+              </span>
               SECTOR 04: ARABIAN SEA
             </span>
+            <span className="hidden sm:inline-block text-white/20">•</span>
+            <p className="text-[#A9AEC1] text-xs font-mono">
+              Realtime Satellite Synthetic Aperture Radar Oil Spill Monitoring & AIS Vessel Attribution Platform
+            </p>
           </div>
-          <p className="text-[#A9AEC1] text-xs font-mono pt-1">
-            Realtime Satellite Synthetic Aperture Radar Oil Spill Monitoring & AIS Vessel Attribution Platform
-          </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        {/* Map & Ships Action Buttons */}
+        <div className="flex items-center gap-3 flex-wrap">
+          <button
+            onClick={() => navigate('/vessels')}
+            className="px-5 py-3 rounded-xl bg-[#1B1B1E] hover:bg-[#24242A] border border-white/15 hover:border-cyan-400/50 text-white font-mono font-bold text-xs md:text-sm uppercase tracking-wider flex items-center gap-2.5 shadow-sm hover:shadow-[0_0_15px_rgba(34,211,238,0.25)] transition-all cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            title="View all tracked vessels and AIS ship map"
+          >
+            <Ship className="w-5 h-5 text-cyan-400" />
+            <span>SHIPS MAP</span>
+          </button>
+
           <button
             onClick={() => navigate('/analyze')}
-            className="px-4 py-2 rounded bg-[#0B3D91] hover:bg-[#164EAA] text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center gap-2 shadow-[0_0_12px_rgba(11,61,145,0.5)] transition-all"
+            className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#0B3D91] to-[#164EAA] hover:from-[#164EAA] hover:to-[#1E5FD8] text-white font-mono font-bold text-xs md:text-sm uppercase tracking-wider flex items-center gap-2.5 shadow-[0_0_20px_rgba(11,61,145,0.6)] border border-blue-400/40 transition-all cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+            title="Launch Interactive SAR Spill Analysis Map"
           >
-            <Compass className="w-4 h-4 text-cyan-400" />
+            <Compass className="w-5 h-5 text-cyan-300 animate-[spin_12s_linear_infinite]" />
             <span>OPEN MAP WORKSPACE</span>
           </button>
         </div>
@@ -97,17 +122,25 @@ export const Dashboard: React.FC = () => {
           </div>
         </div>
 
-        <div className="bg-[#131314] p-4 rounded-lg border border-[rgba(169,174,193,0.18)] space-y-2 relative overflow-hidden group hover:border-cyan-500 transition-all">
+        <div 
+          onClick={() => navigate('/vessels')}
+          className="bg-[#131314] p-4 rounded-lg border border-[rgba(169,174,193,0.18)] space-y-2 relative overflow-hidden group hover:border-cyan-500 transition-all cursor-pointer"
+          title="Click to view all vessels and ships map"
+        >
           <div className="flex items-center justify-between text-[#A9AEC1] text-xs">
             <span>VESSELS FLAGGED / TRACKED</span>
-            <Radio className="w-4 h-4 text-cyan-400" />
+            <div className="w-7 h-7 rounded-md bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center group-hover:scale-110 transition-transform">
+              <Ship className="w-4 h-4 text-cyan-400" />
+            </div>
           </div>
           <div className="text-3xl font-extrabold text-white">
             {vessels.length} <span className="text-xs text-[#A9AEC1] font-normal">TARGETS</span>
           </div>
           <div className="flex items-center justify-between text-[11px] pt-1 border-t border-white/5">
             <span className="text-[#FC3D21] font-bold">1 AIS BLACKOUT</span>
-            <span className="text-[#A9AEC1]">94% ATTRIBUTION</span>
+            <span className="text-cyan-400 group-hover:underline flex items-center gap-1 font-bold">
+              VIEW SHIPS MAP →
+            </span>
           </div>
         </div>
       </div>
