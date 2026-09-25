@@ -1,105 +1,330 @@
 @import "tailwindcss";
 
+@theme {
+  /* Marine Geospatial Intelligence Theme Tokens */
+  --color-primary: #06283D;
+  --color-primary-navy: #06283D;
+  --color-primary-dark: #031825;
+  --color-primary-light: #0d3b56;
+
+  --color-secondary: #087EA4;
+  --color-secondary-teal: #087EA4;
+  --color-secondary-dark: #06607e;
+  --color-secondary-light: #0ea2d3;
+
+  --color-tertiary: #18C7E8;
+  --color-tertiary-cyan: #18C7E8;
+  --color-tertiary-dark: #129db8;
+  --color-tertiary-light: #52ddf5;
+
+  --color-neutral-base: #F5F9FC;
+  --color-neutral-surface: #F5F9FC;
+  --color-neutral-card: #FFFFFF;
+  --color-neutral-border: rgba(6, 40, 61, 0.12);
+
+  /* Typography System */
+  --font-headline: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-label: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-telemetry: 'DM Mono', monospace;
+}
+
 @layer base {
   :root {
-    --bg-void: #0B0B0C;
-    --bg-surface: #131314;
-    --bg-surface-elevated: #1B1B1E;
-    --bg-panel: #24242A;
-    --primary-space: #0B3D91;
-    --primary-space-hover: #164EAA;
-    --accent-aero: #FC3D21;
-    --text-cosmic: #FFFFFF;
-    --text-muted: #A9AEC1;
-    --border-hairline: rgba(169, 174, 193, 0.18);
+    --primary: #06283D;
+    --secondary: #087EA4;
+    --tertiary: #18C7E8;
+    --neutral-base: #F5F9FC;
+    --neutral-surface: #F5F9FC;
+    --neutral-card: #FFFFFF;
+    --border-color: rgba(6, 40, 61, 0.12);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 
   body {
-    background-color: #0B0B0C;
-    color: #E5E2E3;
-    font-family: 'Public Sans', sans-serif;
+    background-color: #F5F9FC;
+    color: #06283D;
+    font-family: 'Work Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
-    letter-spacing: -0.01em;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: #06283D;
+    letter-spacing: -0.015em;
+  }
+
+  button, input, select, textarea, label {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-headline {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Work Sans', sans-serif;
+  }
+
+  .font-label {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
   }
 
   .font-telemetry, .font-mono {
     font-family: 'DM Mono', monospace;
   }
+}
 
-  .font-display {
-    font-family: 'Inter', sans-serif;
+/* Fluid Scrolling & Micro-Animations */
+@keyframes fluidFadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.995);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
 
-/* Custom Scrollbars for Mission Control Density */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #0B0B0C;
-}
-::-webkit-scrollbar-thumb {
-  background: #2A2A2B;
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #434652;
+@keyframes fluidFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
-/* Leaflet Map Custom Stying for Tactical Dark Mode */
+.fluid-animate {
+  animation: fluidFadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.fluid-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  will-change: transform, box-shadow;
+}
+
+.fluid-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -4px rgba(6, 40, 61, 0.1);
+  border-color: rgba(8, 126, 164, 0.35);
+}
+
+.fluid-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* Fluid Smooth Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(245, 249, 252, 0.7);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(8, 126, 164, 0.25);
+  border-radius: 9999px;
+  border: 1px solid rgba(24, 199, 232, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #087EA4 0%, #18C7E8 100%);
+  box-shadow: 0 0 12px rgba(24, 199, 232, 0.45);
+}
+
+/* Marine Geospatial Design System Component Utilities */
+.marine-card {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(6, 40, 61, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px -2px rgba(6, 40, 61, 0.05);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marine-card:hover {
+  border-color: rgba(8, 126, 164, 0.3);
+  box-shadow: 0 8px 24px -4px rgba(6, 40, 61, 0.08);
+}
+
+.marine-card-neutral {
+  background-color: #F5F9FC;
+  border: 1px solid rgba(6, 40, 61, 0.12);
+  border-radius: 14px;
+}
+
+.marine-btn-primary {
+  background-color: #06283D;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  border: 1px solid rgba(24, 199, 232, 0.25);
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(6, 40, 61, 0.2);
+}
+
+.marine-btn-primary:hover {
+  background-color: #087EA4;
+  border-color: #18C7E8;
+  box-shadow: 0 0 16px rgba(24, 199, 232, 0.35);
+  transform: translateY(-1px);
+}
+
+.marine-btn-secondary {
+  background-color: #087EA4;
+  color: #FFFFFF;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  border: 1px solid rgba(24, 199, 232, 0.35);
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.marine-btn-secondary:hover {
+  background-color: #06607e;
+  border-color: #18C7E8;
+  box-shadow: 0 0 14px rgba(24, 199, 232, 0.3);
+}
+
+.marine-input {
+  background-color: #F5F9FC;
+  border: 1px solid rgba(6, 40, 61, 0.15);
+  border-radius: 12px;
+  color: #06283D;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.2s ease;
+}
+
+.marine-input:focus {
+  outline: none;
+  background-color: #FFFFFF;
+  border-color: #087EA4;
+  box-shadow: 0 0 0 3px rgba(8, 126, 164, 0.15);
+}
+
+/* Glow Utilities */
+.glow-cyan {
+  box-shadow: 0 0 16px rgba(24, 199, 232, 0.4);
+}
+
+.glow-teal {
+  box-shadow: 0 0 14px rgba(8, 126, 164, 0.35);
+}
+
+.glow-navy {
+  box-shadow: 0 4px 20px rgba(6, 40, 61, 0.25);
+}
+
+/* Leaflet Map Custom Styling (Light Marine Theme) */
 .leaflet-container {
-  background: #0B0B0C !important;
-  font-family: 'DM Mono', monospace !important;
+  background: #F5F9FC !important;
+  font-family: 'Space Grotesk', sans-serif !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #1B1B1E !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(169, 174, 193, 0.25) !important;
-  border-radius: 4px !important;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6) !important;
+  background: #FFFFFF !important;
+  color: #06283D !important;
+  border: 1px solid rgba(6, 40, 61, 0.15) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px -4px rgba(6, 40, 61, 0.15) !important;
 }
 
 .leaflet-popup-tip {
-  background: #1B1B1E !important;
+  background: #FFFFFF !important;
+}
+
+.leaflet-tooltip {
+  background: rgba(255, 255, 255, 0.96) !important;
+  color: #06283D !important;
+  border: 1px solid rgba(6, 40, 61, 0.15) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(6, 40, 61, 0.1) !important;
 }
 
 .leaflet-control-zoom a {
-  background-color: #1B1B1E !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(169, 174, 193, 0.2) !important;
+  background-color: #FFFFFF !important;
+  color: #06283D !important;
+  border: 1px solid rgba(6, 40, 61, 0.15) !important;
+  border-radius: 8px !important;
 }
 
 .leaflet-control-zoom a:hover {
-  background-color: #0B3D91 !important;
+  background-color: #F5F9FC !important;
+  color: #087EA4 !important;
 }
 
-/* Tactical Glow Utilities */
-.glow-space-blue {
-  box-shadow: 0 0 12px rgba(11, 61, 145, 0.5);
+/* KPI Cards Spotlight Hover Focus Effect */
+.kpi-spotlight-grid {
+  isolation: isolate;
 }
 
-.glow-aero-red {
-  box-shadow: 0 0 12px rgba(252, 61, 33, 0.5);
+.kpi-spotlight-grid:hover .kpi-spotlight-card {
+  filter: blur(0.75px);
+  opacity: 0.75;
+  transform: scale(0.99);
 }
 
-.glow-emerald {
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+.kpi-spotlight-grid .kpi-spotlight-card:hover {
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+  transform: scale(1.035) translateY(-4px) !important;
+  z-index: 25;
+  box-shadow: 0 16px 36px -6px rgba(6, 40, 61, 0.16), 0 0 0 1.5px rgba(24, 199, 232, 0.5) !important;
+  border-color: #18C7E8 !important;
 }
 
-.border-hairline {
-  border-color: rgba(169, 174, 193, 0.18);
+.kpi-spotlight-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+  will-change: transform, filter, opacity, box-shadow;
 }
 
-/* Cut corner / chamfer utility */
-.cut-corner-tr {
-  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+/* Dashboard Main Sections Spotlight Hover Focus Effect (Oil Spill & Active Cases) */
+.section-spotlight-group {
+  isolation: isolate;
 }
 
-.cut-corner-bl {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+.section-spotlight-group:hover .section-spotlight-card {
+  filter: blur(0.75px);
+  opacity: 0.8;
+  transform: scale(0.996);
 }
+
+.section-spotlight-group .section-spotlight-card:hover {
+  filter: blur(0px) !important;
+  opacity: 1 !important;
+  transform: translateY(-4px) scale(1.004) !important;
+  z-index: 20;
+  box-shadow: 0 16px 36px -6px rgba(6, 40, 61, 0.14), 0 0 0 1.5px rgba(24, 199, 232, 0.45) !important;
+  border-color: #18C7E8 !important;
+}
+
+.section-spotlight-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease;
+  will-change: transform, filter, opacity, box-shadow;
+}
+

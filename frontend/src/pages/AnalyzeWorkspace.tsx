@@ -22,7 +22,7 @@ export const AnalyzeWorkspace: React.FC = () => {
       <LeftPanel />
 
       {/* 2. Central Interactive Leaflet Map Workspace (Flex) */}
-      <div className="flex-1 h-full relative overflow-hidden bg-[#0B0B0C]">
+      <div className="flex-1 h-full relative overflow-hidden bg-[#F5F9FC]">
         <MapView />
       </div>
 
